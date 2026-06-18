@@ -6,7 +6,7 @@ import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Label } from "../ui/label";
-// import { useAuthStore } from "@/stores/useAuthStore";
+import { useAuthStore } from "@/stores/useAuthStore";
 import { useNavigate } from "react-router";
 
 const signUpSchema = z.object({
@@ -20,7 +20,7 @@ const signUpSchema = z.object({
 type SignUpFormValues = z.infer<typeof signUpSchema>;
 
 export function SignupForm({ className, ...props }: React.ComponentProps<"div">) {
-  // const { signUp } = useAuthStore();
+  const { signUp } = useAuthStore();
   const navigate = useNavigate();
   const {
     register,
@@ -34,8 +34,9 @@ export function SignupForm({ className, ...props }: React.ComponentProps<"div">)
     const { firstname, lastname, username, email, password } = data;
 
     // gọi backend để signup
-    // await signUp(username, password, email, firstname, lastname);
+    await signUp(username, password, email, firstname, lastname);
 
+    
     navigate("/signin");
   };
 

@@ -6,7 +6,7 @@ import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Label } from "../ui/label";
-// import { useAuthStore } from "@/stores/useAuthStore";
+import { useAuthStore } from "@/stores/useAuthStore";
 import { useNavigate } from "react-router";
 
 const signInSchema = z.object({
@@ -17,7 +17,7 @@ const signInSchema = z.object({
 type SignInFormValues = z.infer<typeof signInSchema>;
 
 export function SigninForm({ className, ...props }: React.ComponentProps<"div">) {
-//   const { signIn } = useAuthStore();
+  const { signIn } = useAuthStore();
   const navigate = useNavigate();
   const {
     register,
@@ -29,7 +29,7 @@ export function SigninForm({ className, ...props }: React.ComponentProps<"div">)
 
   const onSubmit = async (data: SignInFormValues) => {
     const { username, password } = data;
-    // await signIn(username, password);
+    await signIn(username, password);
     navigate("/");
   };
 
@@ -59,7 +59,7 @@ export function SigninForm({ className, ...props }: React.ComponentProps<"div">)
 
                 <h1 className="text-2xl font-bold">Chào mừng quay lại</h1>
                 <p className="text-muted-foreground text-balance">
-                  Đăng nhập vào tài khoản Moji của bạn
+                  Đăng nhập vào tài khoản Talkio của bạn
                 </p>
               </div>
 
@@ -74,7 +74,7 @@ export function SigninForm({ className, ...props }: React.ComponentProps<"div">)
                 <Input
                   type="text"
                   id="username"
-                  placeholder="moji"
+                  placeholder="Talkio User"
                   {...register("username")}
                 />
                 {errors.username && (
