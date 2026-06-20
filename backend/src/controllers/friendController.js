@@ -1,9 +1,12 @@
+import FriendRequest from "../models/FriendRequest.js";
+import Friend from "../models/Friends.js";
+import User from "../models/User.js";
+
 export const sendFriendRequest = async (req, res) => {
     try {
-        const { to, message} = req.body;
+        const { to, message} = req.body; // người nhận lời mời kết bạn
 
-        const from = req.user._id;
-
+        const from = req.user._id; // người đang đăng nhập
         if(from === to) {
             return res
             .status(400)
@@ -15,15 +18,15 @@ export const sendFriendRequest = async (req, res) => {
             return res.status(404).json({ message: "Người dùng không tồn tại" });
         }
 
-        const userA = from.toString();
-        const userB = to.toString();
+        let userA = from.toString();
+        let userB = to.toString();
         if(userA > userB) {
             [userA, userB] = [userB, userA];
         }
         const [alreadyFriends, requestExists] = await Promise.all([
             Friend.findOne({ userA, userB }),
             FriendRequest.findOne({
-                or: [
+                $or: [
                     { from, to },
                     { from: to, to: from },
                 ]
@@ -60,14 +63,14 @@ export const acceptFriendRequest = async (req, res) => {
         }
 
         const friend = await Friend.create({ userA: request.from, userB: request.to });
-        await request.findByIdAndDelete(id);
+        await FriendRequest.findByIdAndDelete(id);
 
         const from = await User.findById(request.from).select("_id displayName avatarUrl").lean();
         res.status(200).json({ message: "Chấp nhận yêu cầu kết bạn thành công", newFriend: {
                 _id: from._id,
                 displayName: from.displayName,
                 avatarUrl: from.avatarUrl
-            } });
+            }});
     } catch (error) {
         console.error("Lỗi khi chấp nhận yêu cầu kết bạn", error);
         res.status(500).json({ message: error.message });
