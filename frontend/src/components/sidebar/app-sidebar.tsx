@@ -21,6 +21,7 @@ import DirectMessageList from "../chat/DirectMessageList";
 import GroupChatList from "../chat/GroupChatList";
 import { useAuthStore } from "@/stores/useAuthStore";
 import { NavUser } from "./nav-user";
+import AddFriendModal from "../chat/AddFriendModal";
 
 
 
@@ -84,7 +85,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
             title="Kết Bạn"
             className="cursor-pointer"
           >
-            {/* <AddFriendModal /> */}
+            <AddFriendModal />
           </SidebarGroupAction>
 
           <SidebarGroupContent>

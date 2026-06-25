@@ -1,3 +1,4 @@
+import User from "../models/User.js"
 export const authMe = async (req, res) => {
   try {
     const user = req.user; // lấy từ authMiddleware
