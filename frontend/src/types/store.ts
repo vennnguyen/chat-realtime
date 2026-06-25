@@ -1,7 +1,7 @@
 
 import type { Socket } from "socket.io-client";
 import type { Conversation, Message } from "./chat";
-import type { User } from "./user";
+import type { Friend, User } from "./user";
 
 export interface AuthState {
   accessToken: string | null;
@@ -72,4 +72,17 @@ export interface SocketState {
   disconnectSocket: () => void
 
 
+}
+
+export interface FriendState {
+  // friends: Friend[];
+  loading: boolean;
+  // receivedList: FriendRequest[];
+  // sentList: FriendRequest[];
+  searchByUsername: (username: string) => Promise<User | null>;
+  addFriend: (to: string, message?: string) => Promise<string>;
+  // getAllFriendRequests: () => Promise<void>;
+  // acceptRequest: (requestId: string) => Promise<void>;
+  // declineRequest: (requestId: string) => Promise<void>;
+  // getFriends: () => Promise<void>;
 }
