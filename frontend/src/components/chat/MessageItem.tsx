@@ -9,7 +9,7 @@ interface MessageItemProps {
   index: number;
   messages: Message[];
   selectedConvo: Conversation;
-  lastMessageStatus: "delivered" | "seen";
+  lastMessageStatus: "Đã gửi" | "Đã xem";
 }
 
 const MessageItem = ({
@@ -83,8 +83,8 @@ const MessageItem = ({
               variant="outline"
               className={cn(
                 "text-xs px-1.5 py-0.5 h-4 border-0",
-                lastMessageStatus === "seen"
-                  ? "bg-primary/20 text-primary"
+                lastMessageStatus === "Đã xem"
+                  ? "text-primary"
                   : "bg-muted text-muted-foreground"
               )}
             >

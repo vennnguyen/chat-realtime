@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/set-state-in-effect */
 import { useChatStore } from "@/stores/useChatStore";
 import ChatWelcomeScreen from "./ChatWelcomeScreen";
 import MessageItem from "./MessageItem";
@@ -11,8 +12,8 @@ const ChatWindowBody = () => {
     messages: allMessages,
     fetchMessages,
   } = useChatStore();
-  const [lastMessageStatus, setLastMessageStatus] = useState<"delivered" | "seen">(
-    "delivered"
+  const [lastMessageStatus, setLastMessageStatus] = useState<"Đã gửi" | "Đã xem">(
+    "Đã gửi"
   );
 
   const messages = allMessages[activeConversationId!]?.items ?? [];
@@ -34,7 +35,7 @@ const ChatWindowBody = () => {
 
     const seenBy = selectedConvo?.seenBy ?? [];
 
-    setLastMessageStatus(seenBy.length > 0 ? "seen" : "delivered");
+    setLastMessageStatus(seenBy.length > 0 ? "Đã xem" : "Đã gửi");
   }, [selectedConvo]);
 
   // kéo xuống dưới khi load convo

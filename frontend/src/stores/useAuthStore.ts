@@ -15,8 +15,9 @@ export const useAuthStore = create<AuthState>()(persist((set, get) => ({
   },
   clearState: () => {
     set({ accessToken: null, user: null, loading: false });
-    localStorage.clear(); // Xóa dữ liệu auth khỏi localStorage
     useChatStore.getState().reset();
+    localStorage.clear(); // Xóa dữ liệu auth khỏi localStorage
+    sessionStorage.clear()
   },
 
   signUp: async (username, password, email, firstName, lastName) => {
@@ -37,9 +38,9 @@ export const useAuthStore = create<AuthState>()(persist((set, get) => ({
 
   signIn: async (username, password) => {
     try {
+      get().clearState()
       set({ loading: true });
-localStorage.clear();
-useChatStore.getState().reset(); // Đặt lại trạng thái chat khi đăng nhập mới
+
       const { accessToken } = await authService.signIn(username, password);
       get().setAccessToken(accessToken);
 
