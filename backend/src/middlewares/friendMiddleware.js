@@ -6,7 +6,7 @@ export const checkFriendship = async (req, res, next) => {
   try {
     const me = req.user._id.toString();
     const recipientId = req.body?.recipientId ?? null;
-    const membersId = req.body?.membersId ?? [];
+    const membersId = req.body?.memberIds ?? [];
 
     if (!recipientId && membersId.length === 0) {
       return res

@@ -55,6 +55,8 @@ export const chatService = {
     name: string,
     memberIds: string[]
   ) {
+
+    
     const res = await api.post("/conversations", { type, name, memberIds });
     return res.data.conversation;
   },
