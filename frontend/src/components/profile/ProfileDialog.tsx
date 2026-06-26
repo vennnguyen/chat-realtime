@@ -3,9 +3,9 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from "../ui/dialog";
 import ProfileCard from "./ProfileCard";
 import { useAuthStore } from "@/stores/useAuthStore";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "../ui/tabs";
-// import PersonalInfoForm from "./PersonalInfoForm";
-// import PreferencesForm from "./PreferencesForm";
-// import PrivacySettings from "./PrivacySettings";
+import PersonalInfoForm from "./PersonalInfoForm";
+import PreferencesForm from "./PreferencesForm";
+import PrivacySettings from "./PrivacySettings";
 
 interface ProfileDialogProps {
   open: boolean;
@@ -19,7 +19,7 @@ const ProfileDialog = ({ open, setOpen }: ProfileDialogProps) => {
       open={open}
       onOpenChange={setOpen}
     >
-      <DialogContent className="max-w-4xl overflow-y-auto max-h-[95vh] p-0 bg-transparent border-0 shadow-2xl">
+      <DialogContent className="max-w-4xl overflow-y-auto max-h-[100vh] p-0 bg-transparent border-0 shadow-2xl">
         <div className="bg-gradient-glass">
           <div className="max-w-4xl mx-auto p-4">
             {/* heading */}
@@ -57,15 +57,15 @@ const ProfileDialog = ({ open, setOpen }: ProfileDialogProps) => {
               </TabsList>
 
               <TabsContent value="personal">
-                {/* <PersonalInfoForm userInfo={user} /> */}
+                <PersonalInfoForm userInfo={user} />
               </TabsContent>
 
               <TabsContent value="preferences">
-                {/* <PreferencesForm /> */}
+                <PreferencesForm />
               </TabsContent>
 
               <TabsContent value="privacy">
-                {/* <PrivacySettings /> */}
+                <PrivacySettings />
               </TabsContent>
             </Tabs>
           </div>
